@@ -535,7 +535,11 @@ public class BulkProcessor implements Closeable, StatsAware {
                 i++;
             }
             message.append("Bailing out...");
-            throw new EsHadoopException(message.toString());
+            if (message.toString().contains("document_missing_exception")) {
+
+            } else {
+                throw new EsHadoopException(message.toString());
+            }
         }
     }
     
